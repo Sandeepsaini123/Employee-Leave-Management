@@ -1,0 +1,119 @@
+<div class="container-fluid py-4 px-3">
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="fw-bold mb-0 text-dark">
+      <i class="bi bi-people-fill text-primary me-2"></i> Employee Management
+    </h4>
+    <button class="btn btn-primary rounded-pill px-3 d-flex align-items-center shadow-sm" (click)="openModel()">
+      <i class="bi bi-plus-lg me-2"></i> Add Employee
+    </button>
+  </div>
+
+  <!-- Employee List Card -->
+  <div class="card border-0 shadow-lg rounded-4">
+    <div class="card-header bg-light border-0 fw-semibold text-dark py-3 d-flex align-items-center">
+      <i class="bi bi-list-task text-primary me-2"></i> Employee List
+    </div>
+
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle mb-0">
+          <thead class="bg-primary text-white text-uppercase small text-center">
+            <tr>
+              <th class="py-3">ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Contact</th>
+              <th>Department</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="text-center">
+            @for (item of employeeList; track $index) {
+              <tr>
+                <td class="fw-semibold">{{ item.employeeId }}</td>
+                <td>{{ item.employeeName }}</td>
+                <td>{{ item.emailId }}</td>
+                <td>{{ item.contactNo }}</td>
+                <td>{{ item.deptName }}</td>
+                <td>{{ item.role }}</td>
+                <td>
+                  <div class="btn-group" role="group">
+                    <!-- <button class="btn btn-sm btn-outline-info rounded-circle me-1" title="View">
+                      <i class="bi bi-eye-fill"></i>
+                    </button> -->
+                    <button class="btn btn-sm btn-outline-warning rounded-circle me-1" title="Edit">
+                      <i class="bi bi-pencil-fill"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger rounded-circle" title="Delete">
+                      <i class="bi bi-trash-fill"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Employee Modal -->
+<div class="modal fade" #newModel tabindex="-1" aria-labelledby="addEmployeeLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content rounded-4 shadow-lg border-0">
+      <!-- Header -->
+      <div class="modal-header bg-primary text-white rounded-top-4">
+        <h5 class="modal-title fw-semibold" id="addEmployeeLabel">
+          <i class="bi bi-person-plus-fill me-2"></i> Add New Employee
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body px-4 py-3">
+        <form>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Employee Name</label>
+              <input type="text" class="form-control rounded-3" placeholder="Enter name" formControlName="employeeName">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Email ID</label>
+              <input type="email" class="form-control rounded-3" placeholder="Enter email" formControlName="emailId">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Contact No</label>
+              <input type="text" class="form-control rounded-3" placeholder="Enter contact number" formControlName="contactNo">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Department</label>
+              <input type="text" class="form-control rounded-3" placeholder="Enter department" formControlName="deptName">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Role</label>
+              <input type="text" class="form-control rounded-3" placeholder="Enter role" formControlName="role">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Employee ID</label>
+              <input type="number" class="form-control rounded-3" placeholder="Enter ID" formControlName="employeeId">
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Footer -->
+      <div class="modal-footer border-0 pt-0">
+        <button type="button" class="btn btn-light border rounded-pill px-4" data-bs-dismiss="modal">
+          <i class="bi bi-x-circle me-1"></i> Cancel
+        </button>
+        <button type="button" class="btn btn-primary rounded-pill px-4">
+          <i class="bi bi-check-circle me-1"></i> Save Employee
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

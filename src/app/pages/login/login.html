@@ -1,0 +1,57 @@
+<div class="login-wrapper d-flex align-items-center justify-content-center min-vh-100 bg-gradient1">
+  <div class="login-card shadow-lg rounded-4 p-4 p-md-5 bg-white" style="width: 100%; max-width: 420px;">
+    <div class="text-center mb-4">
+      <div class="icon-circle bg-primary text-white mb-3 mx-auto">
+        <i class="bi bi-person-fill fs-2"></i>
+      </div>
+      <h4 class="fw-bold text-dark mb-1">Admin Login</h4>
+      <p class="text-muted small">Access the Employee Leave Management System</p>
+    </div>
+
+    <form [formGroup]="loginForm">
+      <!-- Email -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold text-secondary">Email address</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light"><i class="bi bi-envelope-fill text-primary"></i></span>
+          <input type="email" formControlName="emailId" class="form-control" placeholder="Enter your email" />
+        </div>
+        <div *ngIf="f['emailId'].touched && f['emailId'].invalid" class="text-danger small mt-1">
+          <span *ngIf="f['emailId'].errors?.['required']">Email is required</span>
+          <span *ngIf="f['emailId'].errors?.['email']">Enter a valid email</span>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold text-secondary">Password</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light"><i class="bi bi-lock-fill text-primary"></i></span>
+          <input type="password" formControlName="password" class="form-control" placeholder="Enter your password" />
+        </div>
+        <div *ngIf="f['password'].touched && f['password'].invalid" class="text-danger small mt-1">
+          <span *ngIf="f['password'].errors?.['required']">Password is required</span>
+          <span *ngIf="f['password'].errors?.['minlength']">Minimum 6 characters</span>
+        </div>
+      </div>
+
+      <!-- Remember + Forgot -->
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="rememberMe" />
+          <label for="rememberMe" class="form-check-label small text-secondary">Remember me</label>
+        </div>
+        <a href="#" class="text-decoration-none small fw-semibold text-primary">Forgot Password?</a>
+      </div>
+
+      <!-- Login Button -->
+      <button type="button" class="btn btn-primary w-100 py-2 fw-semibold rounded-pill shadow-sm" (click)="onLogin()">
+        <i class="bi bi-box-arrow-in-right me-2"></i> Login
+      </button>
+    </form>
+
+    <div class="text-center mt-4 small text-muted">
+      Don’t have an account? <a href="#" class="text-primary fw-semibold text-decoration-none">Sign Up</a>
+    </div>
+  </div>
+</div>

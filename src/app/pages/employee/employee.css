@@ -1,0 +1,33 @@
+.card {
+  border-radius: 12px;
+}
+
+.table {
+  vertical-align: middle;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table thead {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.btn-sm i {
+  font-size: 0.9rem;
+}
+
+.btn-info {
+  background-color: #0dcaf0;
+  border: none;
+}
+
+.btn-warning {
+  background-color: #f0ad4e;
+  border: none;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border: none;
+}
