@@ -1,11 +1,14 @@
 import { Component, ElementRef, OnInit ,ViewChild,inject} from '@angular/core';
 import { EmployeeService } from '../../services/employee';
-import { APIresponseModel,EmployeeList } from '../../model/Employee.model';
+import { APIresponseModel,EmployeeList, EmployeeModel } from '../../model/Employee.model';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-employee',
-  imports: [],
+  imports: [AsyncPipe,FormsModule],
   templateUrl: './employee.html',
   styleUrl: './employee.css',
 })
@@ -16,8 +19,15 @@ export class Employee implements OnInit {
 
   @ViewChild("newModel") newModel!:ElementRef;
 
+  employeeObj:EmployeeModel=new EmployeeModel();
+
+  deptList$:Observable<any []>=new Observable<any[]>;
+  roleList$:Observable<any []>=new Observable<any[]>;
+
   ngOnInit(): void {
-    this.getEmployees();  
+    this.getEmployees();
+    this.deptList$=this.employeeService.getDepartment();
+    this.roleList$=this.employeeService.getRole();  
   }
 
   getEmployees(){
@@ -41,8 +51,23 @@ export class Employee implements OnInit {
     modal.hide();
   }
 
-  // onSaveEmployee(){
-  //   this.employeeService.onSaveEmployee(this.)
-  // }
+  onSaveEmployee(){
+    this.employeeObj.deptId = Number(this.employeeObj.deptId);
+    this.employeeService.onSaveEmployee(this.employeeObj).subscribe({
+      next:(res:any)=>{
+        if(res.result){
+          this.getEmployees();
+          alert("Employee Created Successfully");
+        }
+        else{
+          alert(res.message);
+        }
+          
+      },
+      error:()=>{
+
+      }
+    })
+  }
 
 }

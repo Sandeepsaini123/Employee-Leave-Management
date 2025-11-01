@@ -31,27 +31,27 @@
           </thead>
           <tbody class="text-center">
             @for (item of employeeList; track $index) {
-              <tr>
-                <td class="fw-semibold">{{ item.employeeId }}</td>
-                <td>{{ item.employeeName }}</td>
-                <td>{{ item.emailId }}</td>
-                <td>{{ item.contactNo }}</td>
-                <td>{{ item.deptName }}</td>
-                <td>{{ item.role }}</td>
-                <td>
-                  <div class="btn-group" role="group">
-                    <!-- <button class="btn btn-sm btn-outline-info rounded-circle me-1" title="View">
+            <tr>
+              <td class="fw-semibold">{{ item.employeeId }}</td>
+              <td>{{ item.employeeName }}</td>
+              <td>{{ item.emailId }}</td>
+              <td>{{ item.contactNo }}</td>
+              <td>{{ item.deptName }}</td>
+              <td>{{ item.role }}</td>
+              <td>
+                <div class="btn-group" role="group">
+                  <!-- <button class="btn btn-sm btn-outline-info rounded-circle me-1" title="View">
                       <i class="bi bi-eye-fill"></i>
                     </button> -->
-                    <button class="btn btn-sm btn-outline-warning rounded-circle me-1" title="Edit">
-                      <i class="bi bi-pencil-fill"></i>
-                    </button>
-                    <button class="btn btn-sm btn-outline-danger rounded-circle" title="Delete">
-                      <i class="bi bi-trash-fill"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
+                  <button class="btn btn-sm btn-outline-warning rounded-circle me-1" title="Edit">
+                    <i class="bi bi-pencil-fill"></i>
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger rounded-circle" title="Delete">
+                    <i class="bi bi-trash-fill"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
             }
           </tbody>
         </table>
@@ -78,27 +78,64 @@
           <div class="row g-3">
             <div class="col-md-6">
               <label class="form-label fw-semibold">Employee Name</label>
-              <input type="text" class="form-control rounded-3" placeholder="Enter name" formControlName="employeeName">
+              <input type="text" name="employeeName" [(ngModel)]="employeeObj.employeeName"
+                class="form-control rounded-3" placeholder="Enter name">
             </div>
+
             <div class="col-md-6">
               <label class="form-label fw-semibold">Email ID</label>
-              <input type="email" class="form-control rounded-3" placeholder="Enter email" formControlName="emailId">
+              <input type="email" name="emailId" [(ngModel)]="employeeObj.emailId" class="form-control rounded-3"
+                placeholder="Enter email">
             </div>
+
             <div class="col-md-6">
               <label class="form-label fw-semibold">Contact No</label>
-              <input type="text" class="form-control rounded-3" placeholder="Enter contact number" formControlName="contactNo">
+              <input type="text" name="contactNo" [(ngModel)]="employeeObj.contactNo" class="form-control rounded-3"
+                placeholder="Enter contact number">
             </div>
+
             <div class="col-md-6">
               <label class="form-label fw-semibold">Department</label>
-              <input type="text" class="form-control rounded-3" placeholder="Enter department" formControlName="deptName">
+              <select class="form-select rounded-3" [(ngModel)]="employeeObj.deptId" name="deptId"
+                (ngModelChange)="employeeObj.deptId = +employeeObj.deptId">
+                <option [ngValue]="0" disabled>Select Department</option>
+                @for (item of deptList$ | async; track $index) {
+                <option [ngValue]="item.deptId">{{ item.deptName }}</option>
+                }
+              </select>
             </div>
+
+
             <div class="col-md-6">
               <label class="form-label fw-semibold">Role</label>
-              <input type="text" class="form-control rounded-3" placeholder="Enter role" formControlName="role">
+              <select class="form-select rounded-3" [(ngModel)]="employeeObj.role" name="role">
+                <option value="" disabled selected>Select Role</option>
+                @for (item of roleList$ | async; track $index) {
+                <option>{{ item }}</option>
+                }
+              </select>
             </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Gender</label>
+              <select class="form-select rounded-3" [(ngModel)]="employeeObj.gender" name="gender">
+                <option value="" disabled selected>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Password</label>
+              <input type="password" [(ngModel)]="employeeObj.password" name="password" class="form-control rounded-3"
+                placeholder="Enter password">
+            </div>
+
             <div class="col-md-6">
               <label class="form-label fw-semibold">Employee ID</label>
-              <input type="number" class="form-control rounded-3" placeholder="Enter ID" formControlName="employeeId">
+              <input type="number" [(ngModel)]="employeeObj.employeeId" name="employeeId" class="form-control rounded-3"
+                placeholder="Enter ID">
             </div>
           </div>
         </form>
@@ -106,14 +143,13 @@
 
       <!-- Footer -->
       <div class="modal-footer border-0 pt-0">
-        <button type="button" class="btn btn-light border rounded-pill px-4" data-bs-dismiss="modal">
+        <button type="button" class="btn btn-light border rounded-pill px-4" data-bs-dismiss="modal" (click)="closeModel()">
           <i class="bi bi-x-circle me-1"></i> Cancel
         </button>
-        <button type="button" class="btn btn-primary rounded-pill px-4">
+        <button type="button" class="btn btn-primary rounded-pill px-4" (click)="onSaveEmployee()">
           <i class="bi bi-check-circle me-1"></i> Save Employee
         </button>
       </div>
     </div>
   </div>
 </div>
-
