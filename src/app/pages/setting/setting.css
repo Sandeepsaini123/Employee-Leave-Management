@@ -1,0 +1,19 @@
+.card {
+  border: none;
+}
+
+.card-header {
+  font-size: 1rem;
+}
+
+.form-label {
+  font-size: 0.9rem;
+}
+
+button {
+  min-width: 120px;
+}
+
+.container {
+  max-width: 1100px;
+}

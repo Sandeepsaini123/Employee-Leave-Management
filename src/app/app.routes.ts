@@ -4,6 +4,7 @@ import { Layout } from './pages/layout/layout';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { Employee } from './pages/employee/employee';
 import { Leave } from './pages/leave/leave';
+import { Setting } from './pages/setting/setting';
 
 export const routes: Routes = [
     {
@@ -30,6 +31,10 @@ export const routes: Routes = [
             {
                 path:'leaves',
                 component:Leave
+            },
+            {
+                path:'setting',
+                component:Setting
             }
         ]
     }
